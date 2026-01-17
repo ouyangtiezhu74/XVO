@@ -57,6 +57,10 @@ export PATH=$CUDA_HOME/bin:$PATH
 export LD_LIBRARY_PATH=$CUDA_HOME/lib64:$LD_LIBRARY_PATH
 pip install PyYAML==6.0.2 timm==1.0.16 matplotlib==3.5.3 pandas==2.3.0 opencv-python==4.11.0.86 a-unet==0.0.16 mmcv-full==1.7.2 numpy==1.26.4 pillow==11.0.0 av2==0.2.1 nuscenes-devkit==1.1.11
 ```
+On Windows, you can quickly verify the core GPU dependencies after installation:
+```bat
+python -c "import torch, pytorch3d; from pytorch3d import _C; print('torch', torch.__version__); print('pytorch3d', pytorch3d.__version__); print('torch cuda', torch.cuda.is_available())"
+```
 
 ## Training 
 1. **Install the correlation package**  
