@@ -64,6 +64,7 @@ def proper_svd(F):
     Proper svd guarantees U and V are rotation matrices, i.e., det(U) = det(V) = 1
     The last element of S may be negative if needed, i.e., s1 >= s2 >= |s3| >= 0
     """
+    device = F.device
     F = F.cpu()
     u1, s1, v1 = torch.svd(F)
 
@@ -76,8 +77,7 @@ def proper_svd(F):
     det = torch.det(v1).reshape(-1, 1, 1)
     v = torch.cat((v1[:, :, :-1], v1[:, :, -1:] * det), -1)
 
-    u, s, v = u.cuda(), s.cuda(), v.cuda()
-    return u, s, v
+    return u.to(device), s.to(device), v.to(device)
 
 
 def S_to_Lam(S):
